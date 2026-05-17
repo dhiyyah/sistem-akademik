@@ -12,6 +12,7 @@
 <?php
 include "connection.php";
 $id = $_GET['id_mahasiswa'];
+$data = [];
 if (!empty($id)) {
     $result = $conn->query("SELECT * FROM mahasiswa WHERE id_mahasiswa='$id'");
     $data = $result->fetch_assoc();
@@ -76,11 +77,13 @@ if (!empty($id)) {
                 <div class="mb-3">
                     <label for="prodi" class="form-label">Program Studi</label>
                     <select class="form-select" id="prodi" name="prodi">
-                        <option selected disabled value="">Pilih Program Studi</option>
-                        <option value="Ilmu Komputer">Ilmu Komputer</option>
-                        <option value="Sistem Informasi">Sistem Informasi</option>
-                        <option value="Matematika">Matematika</option>
-                        <option value="Sains Data">Sains Data</option>
+                        <?php
+                        $result = $conn->query("SELECT * from prodi");
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) { ?>
+                                <option value="<?= $row['id_prodi'] ?>" <?php if($data['id_prodi'] == $row['id_prodi']) echo "selected" ?>><?= $row['nama_prodi'] ?></option>
+                           <?php }
+                        } ?>
                     </select>
                 </div>
 

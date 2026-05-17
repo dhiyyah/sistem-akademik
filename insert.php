@@ -8,6 +8,8 @@ $tanggal_lahir = $_POST['tanggal_lahir'];
 $agama         = $_POST['agama'];
 $prodi = $_POST['prodi'];
 $ukm = isset($_POST['ukm']) ? implode(", ", $_POST['ukm']) : "-";
+
+$foto_profil = '';
 if (isset($_FILES['foto_profil']) && !empty($_FILES['foto_profil']['name'])) {
     $foto_profil = $_FILES['foto_profil']['name'];
     $tmp_name    = $_FILES['foto_profil']['tmp_name'];
@@ -35,16 +37,13 @@ if ($id && $id != '') {
         window.location.href = 'index.html';
         </script>";
 } else {
-    // jika tidak ada id
- $sql = "INSERT INTO mahasiswa (jenis_kelamin, tanggal_lahir, nama, nim, agama, ukm, foto_profil, id_prodi) 
-    VALUES ('$jenis_kelamin', '$tanggal_lahir', '$nama', '$nim', '$agama', '$ukm', '$foto_profil', '$prodi')";
-    $conn->query($sql);
+    $sql = "INSERT INTO mahasiswa (jenis_kelamin, tanggal_lahir, nama, nim, agama, ukm, foto_profil, id_prodi) 
+        VALUES ('$jenis_kelamin', '$tanggal_lahir', '$nama', '$nim', '$agama', '$ukm', '$foto_profil', '$prodi')";
     
     $script = "<script>
         alert('Data mahasiswa berhasil disimpan!');
         window.location.href = 'index.html';
         </script>";
-
 }
 
 if ($conn->query($sql) === TRUE) {
