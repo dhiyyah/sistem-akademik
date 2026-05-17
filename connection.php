@@ -2,7 +2,7 @@
 $servername = 'localhost';
 $username = 'root';
 $password = '';
-$dbname = 'sistem-akademik';
+$dbname = 'biodata';
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
